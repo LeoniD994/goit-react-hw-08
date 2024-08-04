@@ -1,54 +1,47 @@
-import PropTypes from 'prop-types';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import styles from './ContactForm.module.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { nanoid } from "nanoid";
+import { addContact } from "../../redux/contactsSlice";
+import styles from "./ContactForm.module.css";
 
-const ContactForm = ({ onSubmit }) => {
-  const initialValues = {
-    name: '',
-    number: ''
+const ContactForm = () => {
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newContact = { id: nanoid(), name, number };
+    dispatch(addContact(newContact));
+    setName("");
+    setNumber("");
   };
 
-  const validationSchema = Yup.object({
-    name: Yup.string()
-      .min(3, 'Must be at least 3 characters')
-      .max(50, 'Must be 50 characters or less')
-      .required('Required'),
-    number: Yup.string()
-      .matches(/^[0-9]+$/, 'Must be only digits')
-      .required('Required')
-  });
-
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values, { resetForm }) => {
-        onSubmit(values);
-        resetForm();
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form className={styles['contact-form']}>
-          <div>
-            <Field name="name" type="text" placeholder="Name" />
-            <ErrorMessage name="name" component="div" className={styles.error} />
-          </div>
-          <div>
-            <Field name="number" type="text" placeholder="Number" />
-            <ErrorMessage name="number" component="div" className={styles.error} />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            Add Contact
-          </button>
-        </Form>
-      )}
-    </Formik>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label className={styles.label}>
+        Name
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+      <label className={styles.label}>
+        Number
+        <input
+          type="tel"
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
+          required
+        />
+      </label>
+      <button type="submit" className={styles.button}>
+        Add contact
+      </button>
+    </form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
