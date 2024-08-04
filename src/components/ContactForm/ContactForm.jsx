@@ -20,21 +20,21 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.label}>
-        Name
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          placeholder="Name"
         />
       </label>
       <label className={styles.label}>
-        Number
         <input
           type="tel"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
           required
+          placeholder="Number"
         />
       </label>
       <button type="submit" className={styles.button}>
