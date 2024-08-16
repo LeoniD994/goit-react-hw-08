@@ -1,0 +1,16 @@
+.homePage {
+  background-color: rgb(238, 241, 241);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 20px 0;
+}

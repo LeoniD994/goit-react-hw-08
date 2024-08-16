@@ -1,0 +1,17 @@
+.userMenu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.userBtn {
+  background-color: #bb5e5e;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.userName {
+  margin: 0;
+}
