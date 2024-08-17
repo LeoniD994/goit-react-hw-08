@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
-import styles from "./RegisterForm.module.css";
+import styles from "./RegistrationForm.module.css";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
     .required("Required"),
 });
 
-const RegisterForm = () => {
+const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -68,4 +68,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegistrationForm;
